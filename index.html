@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#160b11">
+<title>Ken and Dira</title>
+<style>
+:root{--bg:#10080d;--panel:#211019;--panel2:#2a1420;--pink:#f2b8cb;--soft:#d9b9c5;--white:#fff3f7;--muted:#a98d98;--line:#603348;--gold:#e9c8a0}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--white);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(ellipse at 50% 0%,#482033 0%,#24111b 38%,#10080d 78%);display:flex;align-items:center;justify-content:center;padding:22px}
+main{width:min(720px,100%);margin:auto}
+.panel{background:linear-gradient(145deg,rgba(45,21,33,.97),rgba(23,11,17,.98));border:1px solid rgba(242,184,203,.18);border-radius:24px;padding:clamp(24px,5vw,46px);box-shadow:0 24px 80px #0008}
+.eyebrow{font:11px/1.4 Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--pink);text-align:center}
+h1,h2,p{text-align:center}
+h1{font-size:clamp(34px,8vw,58px);font-weight:400;letter-spacing:.03em;margin:14px 0;color:var(--white)}
+h2{font-size:clamp(25px,6vw,38px);font-weight:400;color:var(--pink);margin:10px 0 18px}
+p{color:var(--soft);line-height:1.75;font-size:16px}
+button{border:1px solid #bd8299;background:linear-gradient(135deg,#9e536f,#6e304b);color:white;border-radius:999px;padding:14px 24px;font:600 12px Arial,sans-serif;letter-spacing:.14em;cursor:pointer;transition:.2s}
+button:hover{filter:brightness(1.13);transform:translateY(-1px)}
+button.secondary{background:transparent;border-color:#704357;color:var(--pink)}
+button:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}
+input{display:block;width:100%;max-width:420px;margin:22px auto 0;padding:15px 17px;border-radius:12px;border:1px solid #75465b;background:#130a10;color:white;text-align:center;font-size:17px;outline:none}
+input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #f2b8cb22}
+.question{white-space:pre-line;text-align:left;background:#160b12;border:1px solid #4b2939;border-radius:15px;padding:20px;color:#f4dce5;line-height:1.8;font-size:16px;margin:24px 0}
+.feedback{min-height:28px;text-align:center;color:var(--pink);font-style:italic;margin-top:14px}
+.progress{display:flex;gap:7px;justify-content:center;margin:22px 0 28px}
+.dot{width:27px;height:4px;border-radius:9px;background:#523344}.dot.done{background:var(--pink)}.dot.current{background:#e8c9a7}
+.small{font:11px Arial,sans-serif;color:var(--muted);letter-spacing:.1em;text-align:center}
+.video-wrap{width:100%;margin:24px auto 0;background:#160b12;border:1px solid #704357;border-radius:15px;overflow:hidden;display:flex;justify-content:center;align-items:center}
+video{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;background:#160b12}
+.reveal{min-height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:fadeIn 1.2s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.blackout{position:fixed;inset:0;background:#050306;z-index:10;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;animation:fadeIn 1.2s ease both}
+.blackout.show{display:flex}
+.reveal-title{font-size:clamp(31px,8vw,60px);line-height:1.2;color:#ffe6ee}
+.date{font:600 14px Arial,sans-serif;letter-spacing:.28em;color:#e8c9a7;margin-top:16px}
+.tease{font-size:clamp(18px,4.5vw,25px);font-style:italic;color:#f2b8cb;margin:35px 0 8px}
+@media(max-width:480px){body{padding:12px}.panel{border-radius:18px}.question{font-size:15px;padding:16px}}
+</style>
+</head>
+<body>
+<main>
+<section class="panel" id="app">
+  <div class="eyebrow">sebuah cerita kecil</div>
+  <h1>Ken and Dira</h1>
+  <p>Ada lima hal kecil yang harus kamu ingat.<br>Jawab satu per satu, ya. ❤️</p>
+  <div class="actions"><button id="start">MULAI</button></div>
+  <p class="small" style="margin-top:25px">psst… coba jawab dengan benar, gendud 🤭</p>
+</section>
+</main>
+<div class="blackout" id="blackout">
+  <div class="reveal">
+    <div class="eyebrow">kejutan sebenarnya</div>
+    <div class="reveal-title">AKU PULANG<br>RABU INI! 🥹</div>
+    <div class="date">4 NOVEMBER 2026</div>
+    <div class="tease">mau tau jam berapa?</div>
+    <h2 style="margin:0;color:#f2b8cb">tanya aja cowo kamu 🤭</h2>
+    <p style="margin-top:28px">❤️</p>
+  </div>
+</div>
+<script>
+const puzzles = [
+ {title:"First Encounter", question:"👦🏻: “B 1778 UFZ”\n👧🏻: “Aku udah di bawah”\n👦🏻: “Bentar aku kayanya liat kamu, baju pink ya?”\n👧🏻: “Yess”\n\nKapan tuhh?", answers:["25 november 2025","25/11/2025","25-11-2025"]},
+ {title:"TSM Cibubur", question:"Inget TSM Cibubur? Ada yang pose depan kaca merasa keren sambil foto. Keren karena aksesoris yang dipake sih. Apa aksesoris nya?", answers:["skull glasses","kacamata tengkorak"]},
+ {title:"Curug Bogor", question:"Seru ya ke curug di Bogor? Ya walaupun hujan cowo kamu selalu ready sih. Barang yang paling diantisipasikan dan akhirnya berguna banget itu apa?", answers:["poncho"]},
+ {title:"The Missing Day", question:"Sebenernya anniv kita tanggal 02 Januari ya, cuma alangkah sempurna nya kalau kita mundur berapa hari?", answers:["1 hari","1","satu hari","satu"]},
+ {title:"Final Key", question:"Haii shedatirra. You’ve made it this far. Maaf ya aku belakangan ini nyebelin dan slow respon (sengaja). Tapi abis ini i hope you understand why. Best surprise ever?? Hopefully. Anyway, i love you (…)\n\nHint: “Sofia the first”", answers:["princess"]}
+];
+const wrong=["WAH??","KAMU GA SAYANG AKU LAGI??","PARAH GENDUD","okeh..","pikun dasar gendud"];
+let index=0, attempts=0, completed=0;
+const app=document.getElementById("app");
+const blackout=document.getElementById("blackout");
+function norm(s){return s.toLowerCase().trim().replace(/[.!?]/g,"").replace(/\s+/g," ")}
+function renderPuzzle(){
+ const p=puzzles[index];
+ app.innerHTML=`<div class="eyebrow">ken and dira · puzzle ${index+1} dari 5</div>
+ <h2>${p.title}</h2><div class="progress">${puzzles.map((_,i)=>`<span class="dot ${i<completed?'done':i===index?'current':''}"></span>`).join("")}</div>
+ <div class="question"></div><input id="answer" autocomplete="off" placeholder="jawaban kamu..." aria-label="Jawaban"><div class="feedback" id="feedback"></div>
+ <div class="actions"><button id="check">JAWAB</button>${completed>0?'<button class="secondary" id="back">PUZZLE SEBELUMNYA</button>':''}</div>`;
+ app.querySelector(".question").textContent=p.question;
+ document.getElementById("check").onclick=check;
+ document.getElementById("answer").addEventListener("keydown",e=>{if(e.key==="Enter")check()});
+ const back=document.getElementById("back");if(back)back.onclick=()=>{index=Math.max(0,index-1);renderPuzzle()};
+}
+function check(){
+ const input=document.getElementById("answer"), feedback=document.getElementById("feedback");
+ if(puzzles[index].answers.map(norm).includes(norm(input.value))){
+   completed=Math.max(completed,index+1);
+   feedback.textContent="NAHHH GITUU DONG SAYANGGG ❤️";
+   const btn=document.getElementById("check");btn.disabled=true;
+   setTimeout(()=>{if(index<4){index++;attempts=0;renderPuzzle()}else renderVideo()},950);
+ }else{
+   attempts++;
+   feedback.textContent=attempts<=4?wrong[attempts-1]:wrong[4];
+   input.value="";input.focus();
+   setTimeout(()=>{if(feedback.isConnected)feedback.textContent=""},2300);
+ }
+}
+function renderVideo(){
+ app.innerHTML=`<div class="eyebrow">satu kenangan kecil untuk kamu</div><h2>For you, Dira ❤️</h2><p>Putar videonya sampai selesai, ya.</p>
+ <div class="video-wrap"><video id="memory" controls playsinline preload="metadata"><source src="memory.mp4" type="video/mp4">Browser kamu tidak mendukung video.</video></div>
+ <p class="small">Video asli · tanpa crop atau edit</p>
+ <div class="actions"><button id="continue" disabled>MASIH ADA SATU LAGI...</button></div>`;
+ const v=document.getElementById("memory"), b=document.getElementById("continue");
+ v.addEventListener("ended",()=>{b.disabled=false;b.textContent="MASIH ADA SATU LAGI..."});
+ b.onclick=()=>{blackout.classList.add("show");document.body.style.overflow="hidden"};
+}
+document.getElementById("start").onclick=()=>{index=0;attempts=0;completed=0;renderPuzzle()};
+</script>
+</body>
+</html>

@@ -101,7 +101,7 @@ function check(){
 function renderVideo(){
  app.innerHTML=`<div class="eyebrow">satu kenangan kecil untuk kamu</div><h2>For you, Dira ❤️</h2><p>Putar videonya sampai selesai, ya.</p>
  <div class="video-wrap"><video id="memory" controls playsinline preload="metadata"><source src="memory.mp4" type="video/mp4">Browser kamu tidak mendukung video.</video></div>
- <p class="small">Video asli · tanpa crop atau edit</p>
+ <p class="small"></p>
  <div class="actions"><button id="continue" disabled>MASIH ADA SATU LAGI...</button></div>`;
  const v=document.getElementById("memory"), b=document.getElementById("continue");
  v.addEventListener("ended",()=>{b.disabled=false;b.textContent="MASIH ADA SATU LAGI..."});
